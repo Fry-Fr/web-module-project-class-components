@@ -2,8 +2,6 @@ import React from 'react';
 import ToDoForm from './components/TodoForm'
 import ToDoList from './components/TodoList';
 
-const toDo = [];
-
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -12,25 +10,22 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      name: '',
-      id: 0,
-      completed: false
+      toDo: []
     };
   };
 
-  handleAddToDo = (event) => {
-    event.preventDefault();
-  }
+  AddToDo = (newTask) => {
 
-  handleClearCompleted = (event) => {
-    event.preventDefault();
-  }
+    this.setState({
+     toDo:[...this.state.toDo,{
+       task: newTask,
+       id: Date.now(),
+       completed: false
+     }]
+    });
+  };
 
-  handleOnChange = (event) => {
-    event.preventDefault();
-    this.setState(
-      [...toDo,{}]
-    )
+  ClearCompleted = () => {
 
   }
 
@@ -38,13 +33,7 @@ class App extends React.Component {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <ToDoForm 
-          addToDo={this.handleAddToDo} 
-          clear={this.handleClearCompleted} 
-          onChangeHandler={this.handleOnChange}
-          data={this.state}
-          />
-
+        <ToDoForm addToDo={this.AddToDo} />
         <ToDoList />
       </div>
     );
