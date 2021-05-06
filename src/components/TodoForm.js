@@ -1,26 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const ToDoForm = ({ addToDo }) => {
+class ToDoForm extends React.Component  {
 
-    const [ task, setTask ] = useState('')
+    constructor(){
+        super();
+        this.state = {
+            task: ''
+        }
+    }
 
-    const onSubmit = (event) => {
+    onSubmit = (event) => {
         event.preventDefault();
-        addToDo(task);
-        setTask('');
+        this.props.addToDo(this.state.task);
+        this.setState({
+            task: ''
+        })
+        
     }
 
-    const onChange = (event) => {
-        const newTask = event.target.value;
-        setTask(newTask)   
+    onChange = (event) => {
+        this.setState({
+            task: event.target.value
+        }) 
     }
 
-    return (
-        <form onSubmit={onSubmit}>
-            <input type="text" name="task" value={task} onChange={onChange}/>
-            <button>add</button>
-            <button>clear completed</button>
-        </form>
-    );
+    render(){
+        return (
+            <form onSubmit={this.onSubmit}>
+                <input type="text" name="task" value={this.state.task} onChange={this.onChange}/>
+                <button>add</button>
+                <button>clear completed</button>
+            </form>
+        );
+    };
 };
 export default ToDoForm;
