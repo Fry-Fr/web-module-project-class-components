@@ -1,0 +1,7 @@
+.completed {
+    text-decoration: line-through;
+}
+.task {
+    display: inline-block;
+    cursor: default;
+}

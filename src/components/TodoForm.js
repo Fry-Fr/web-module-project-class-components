@@ -14,8 +14,7 @@ class ToDoForm extends React.Component  {
         this.props.addToDo(this.state.task);
         this.setState({
             task: ''
-        })
-        
+        })       
     }
 
     onChange = (event) => {
@@ -24,12 +23,17 @@ class ToDoForm extends React.Component  {
         }) 
     }
 
+    clearCompleted = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
     render(){
         return (
             <form onSubmit={this.onSubmit}>
                 <input type="text" name="task" value={this.state.task} onChange={this.onChange}/>
                 <button>add</button>
-                <button>clear completed</button>
+                <button onClick={this.clearCompleted}>clear completed</button>
             </form>
         );
     };
