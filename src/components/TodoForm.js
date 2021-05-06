@@ -5,35 +5,36 @@ class ToDoForm extends React.Component  {
     constructor(){
         super();
         this.state = {
-            task: ''
+            newTask: ''
         }
     }
 
     onSubmit = (event) => {
         event.preventDefault();
-        this.props.addToDo(this.state.task);
+        this.props.addToDo(this.state.newTask);
         this.setState({
-            task: ''
+            newTask: ''
         })       
     }
 
     onChange = (event) => {
         this.setState({
-            task: event.target.value
+            newTask: event.target.value
         }) 
     }
 
-    clearCompleted = (event) => {
+    handleClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
+        this.props.clear();
     }
 
     render(){
         return (
             <form onSubmit={this.onSubmit}>
-                <input type="text" name="task" value={this.state.task} onChange={this.onChange}/>
+                <input type="text" name="task" value={this.state.newTask} onChange={this.onChange}/>
                 <button>add</button>
-                <button onClick={this.clearCompleted}>clear completed</button>
+                <button onClick={this.handleClick}>clear completed</button>
             </form>
         );
     };

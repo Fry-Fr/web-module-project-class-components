@@ -1,17 +1,16 @@
 import React from 'react';
 
-const ToDo = ({ todo, clear }) => {
+const ToDo = ({ todo, completed }) => {
 
     const onClick = (event) => {
-        const toggle = event.target;
-        toggle.classList.toggle("completed");
-        clear()
+        event.preventDefault();
+        completed(todo.id)
     }
 
     return (
-        <>
-        <p className="task" onClick={onClick}>{todo.task}</p>
-        </>
+        <div className={`task${todo.completed ? ' completed' : ''}`}>
+            <p onClick={onClick}>{todo.task}</p>
+        </div>
     )
 }
 export default ToDo;
