@@ -10,12 +10,13 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      toDo: []
+      toDo: [],
+      name: prompt("what is your name?")
     };
   };
 
-  AddToDo = (newTask) => {
 
+  AddToDo = (newTask) => {
     this.setState({
      toDo:[...this.state.toDo,{
        task: newTask,
@@ -48,7 +49,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="main">
-        <h2>Welcome to your Todo App!</h2>
+        <h2>Welcome {this.state.name} to your Todo App!</h2>
         <ToDoForm addToDo={this.AddToDo} clear={this.ClearCompleted} />
         <ToDoList todo={this.state.toDo} completed={this.Completed} />
       </div>
